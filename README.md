@@ -1,6 +1,67 @@
 # ENSO Climate Analytics: Monitoring Climate Anomalies, Economic Losses & Food Security
 
+[![GitHub stars](https://img.shields.io/github/stars/samalarakshithbabu/enso-climate-analytics)](https://github.com/samalarakshithbabu/enso-climate-analytics/stargazers)
+[![GitHub forks](https://img.shields.io/github/forks/samalarakshithbabu/enso-climate-analytics)](https://github.com/samalarakshithbabu/enso-climate-analytics/network)
+[![GitHub issues](https://img.shields.io/github/issues/samalarakshithbabu/enso-climate-analytics)](https://github.com/samalarakshithbabu/enso-climate-analytics/issues)
+[![GitHub license](https://img.shields.io/github/license/samalarakshithbabu/enso-climate-analytics)](https://github.com/samalarakshithbabu/enso-climate-analytics/blob/main/LICENSE)
+![Python](https://img.shields.io/badge/python-3.8%2B-blue)
+![Last Commit](https://img.shields.io/github/last-commit/samalarakshithbabu/enso-climate-analytics)
+
 An end-to-end climate intelligence and business analytics dashboard evaluating Equatorial Pacific Sea Surface Temperatures (SST), El Niño & La Niña cycles, global agricultural yields, and socio-economic vulnerabilities. This framework bridges spatial climate data and policy analytics to empower data-driven climate resilience and disaster risk reduction.
+
+---
+
+## System Architecture
+
+```mermaid
+flowchart TB
+    subgraph Data Sources
+        NOAA[NOAA - SST & ONI]
+        NASA[NASA SEDAC]
+        FAO[FAO - Crop Data]
+        EM[EM-DAT - Disasters]
+        WB[World Bank]
+    end
+
+    subgraph Data Pipeline
+        Raw[Raw Data Store]
+        Processed[Processed Data]
+        Pipeline[data_pipeline.py]
+    end
+
+    subgraph Analysis
+        Lag[lag_correlation.py]
+        Regression[regression_model.py]
+        Forecast[forecast.py]
+    end
+
+    subgraph Output
+        Metrics[Analytics Metrics]
+        Dashboard[Streamlit Dashboard]
+        Notebooks[Jupyter Notebooks]
+    end
+
+    NOAA --> Raw
+    NASA --> Raw
+    FAO --> Raw
+    EM --> Raw
+    WB --> Raw
+
+    Raw --> Pipeline
+    Pipeline --> Processed
+
+    Processed --> Lag
+    Processed --> Regression
+    Regression --> Forecast
+
+    Lag --> Metrics
+    Regression --> Metrics
+    Forecast --> Metrics
+
+    Metrics --> Dashboard
+    Lag --> Notebooks
+    Regression --> Notebooks
+```
 
 ---
 
